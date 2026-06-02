@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "fullName": "Samaa El Bakry",
+      "email": "samaa@example.com",
+      "password": "12345678",
+      "phone": "01012345678",
+      "avatar": "https://i.pravatar.cc/150?img=1"
+    }
+  ],
+
+  "drivers": [
+    {
+      "id": "101",
+      "name": "Ahmed Hassan",
+      "rating": 4.9,
+      "carModel": "Toyota Corolla",
+      "plateNumber": "ABC-123",
+      "lat": 31.2156,
+      "lng": 29.9553,
+      "isAvailable": true
+    },
+    {
+      "id": "102",
+      "name": "Mohamed Ali",
+      "rating": 4.8,
+      "carModel": "Hyundai Elantra",
+      "plateNumber": "XYZ-456",
+      "lat": 31.2050,
+      "lng": 29.9200,
+      "isAvailable": true
+    }
+  ],
+
+  "rides": [
+    {
+      "id": "1001",
+      "userId": "1",
+      "driverId": "101",
+      "pickup": "Alexandria Library",
+      "destination": "Stanley Bridge",
+      "distance": 7.2,
+      "duration": 15,
+      "price": 55,
+      "status": "completed",
+      "createdAt": "2026-06-02T10:00:00Z"
+    }
+  ]
+}
