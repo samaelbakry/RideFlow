@@ -7,9 +7,20 @@
       "password": "12345678",
       "phone": "01012345678",
       "avatar": "https://i.pravatar.cc/150?img=1"
+    },
+    {
+      "fullName": "Samaa Ibrahim",
+      "email": "samaabakry68@gmail.com",
+      "password": "sam@1020",
+      "id": "FOsgD8qtsiE"
+    },
+    {
+      "fullName": "Kay Chan",
+      "email": "julu@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": "Mh7GUUTKr0w"
     }
   ],
-
   "drivers": [
     {
       "id": "101",
@@ -27,12 +38,11 @@
       "rating": 4.8,
       "carModel": "Hyundai Elantra",
       "plateNumber": "XYZ-456",
-      "lat": 31.2050,
-      "lng": 29.9200,
+      "lat": 31.205,
+      "lng": 29.92,
       "isAvailable": true
     }
   ],
-
   "rides": [
     {
       "id": "1001",
@@ -45,6 +55,37 @@
       "price": 55,
       "status": "completed",
       "createdAt": "2026-06-02T10:00:00Z"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "backos",
+      "destination": "fleming",
+      "vehichalType": "Comfort",
+      "vehichalPrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-04T13:18:01.624Z",
+      "id": "tqFEx3Z9eDY"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "fleming",
+      "veichalType": "UberX",
+      "veichalPrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-04T13:20:32.791Z",
+      "id": "sduRHO3HePU"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakoss",
+      "destination": "fleming",
+      "vehicleType": "Premium",
+      "vehiclePrice": 120,
+      "status": "pending",
+      "createdAt": "2026-06-04T13:28:05.575Z",
+      "id": "RZ2X3M4Oigk"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

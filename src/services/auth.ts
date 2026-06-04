@@ -11,9 +11,7 @@ export type LoginPayload = {
   password: string;
 };
 
-export const registerUser = async (
-  data: RegisterPayload
-) => {
+export const registerUser = async ( data: RegisterPayload) => {
   const users = await api.get("/users");
 
   const existingUser = users.data.find(
@@ -35,9 +33,11 @@ export const registerUser = async (
 
 
 export const loginUser = async (data: LoginPayload) => {
-  const response = await api.get("/users", data);
+  const response = await api.get("/users");
 
-  const user = response.data.find((u: { email: string; password: string }) => u.email === data.email && u.password === data.password);
+  const user = response.data.find(
+    (u: { email: string; password: string }) => u.email === data.email && u.password === data.password
+  );
   if (!user) {
     throw new Error("Invalid credentials");
   }

@@ -2,8 +2,8 @@
 import { LoginSchemaType, loginSchema } from "@/schemas/auth-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "../input";
-import { Button } from "../button";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
@@ -11,6 +11,7 @@ import { loginUser } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks";
 import { setUser } from "@/store/slices/authSlice";
+import { toast } from "sonner";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -21,11 +22,12 @@ export default function LoginForm() {
     onSuccess: (user) => {
       dispatch(setUser(user));
       localStorage.setItem("user", JSON.stringify(user));
-      router.push("/home");
+      toast("Logged in successfully!");
+      router.push("/");
     },
 
     onError: (error) => {
-      console.error(error);
+      toast(error.message);
     },
   });
 
@@ -40,7 +42,6 @@ export default function LoginForm() {
   const onSubmit = (values: LoginSchemaType) => {
     mutate(values);
   };
-
 
   return (
     <>

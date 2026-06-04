@@ -1,18 +1,19 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { registerSchema, RegisterSchemaType } from "@/schemas/auth-schema";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "@/services/auth";
-import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks";
 import { setUser } from "@/store/slices/authSlice";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function RegisterForm() {
   const dispatch = useAppDispatch();
@@ -23,11 +24,12 @@ export default function RegisterForm() {
     onSuccess: (user) => {
       dispatch(setUser(user));
       localStorage.setItem("user", JSON.stringify(user));
-      router.push("/home");
+      toast("Account created successfully!");
+      router.push("/");
     },
 
     onError: (error) => {
-      console.error(error);
+      toast(error.message);
     },
   });
   const {
