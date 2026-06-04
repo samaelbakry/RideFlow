@@ -4,9 +4,21 @@ import ProtectedRoutes from "@/components/auth/ProtectedRoutes";
 import MapView from "@/components/home/MapView";
 import RequestRide from "@/components/ride/RequestRide";
 import { useAppSelector } from "@/store/hooks";
+import { useState } from "react";
+
+
+export type Driver = {
+  id: string | number;
+  lat: number;
+  lng: number;
+  name:string,
+  rating:string,
+  carModel:string
+};
 
 export default function Home() {
   const user = useAppSelector((state) => state.auth.user);
+  const [selectedDriver, setSelectedDriver] = useState<Driver| null>(null);
 
   const initials = user?.fullName
     ?.split(" ")
@@ -33,10 +45,10 @@ export default function Home() {
                 {initials}
               </div>
             </div>
-            <RequestRide />
+            <RequestRide selectedDriver={selectedDriver} setSelectedDriver={setSelectedDriver}/>
           </section>
           <section className="relative bg-gray-100">
-            <MapView />
+            <MapView  selectedDriver={selectedDriver}/>
           </section>
         </div>
       </main>

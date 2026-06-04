@@ -1,8 +1,9 @@
 "use client";
+import { Driver } from "@/app/page";
 import { createRide } from "@/services/riders";
 import { useAppSelector } from "@/store/hooks";
-import { Search } from "lucide-react";
 import { useState } from "react";
+import NearbyDriver from "./NearbyDriver";
 
 const RIDES = [
   {
@@ -27,7 +28,14 @@ const RIDES = [
     duration: "~18 min",
   },
 ];
-export default function RequestRide() {
+
+export default function RequestRide({
+  selectedDriver,
+  setSelectedDriver,
+}: {
+  selectedDriver: Driver | null;
+  setSelectedDriver: (driver: Driver) => void;
+}) {
   const user = useAppSelector((state) => state.auth.user);
   const [selected, setSelected] = useState(0);
   const [destination, setDestination] = useState("");
@@ -35,26 +43,27 @@ export default function RequestRide() {
   const [rideStatus, setRideStatus] = useState("idle");
 
   async function handleRideRequest() {
-    if (!pickup || !destination) return;
-
-    setRideStatus("searching");
-
-    const ride = {
-      userId: user?.id,
-      pickup,
-      destination,
-      vehicleType: RIDES[selected].name,
-      vehiclePrice: RIDES[selected].price,
-      status: "pending",
-      createdAt: new Date().toISOString(),
-    };
+    if (!pickup || !destination || !selectedDriver) return;
 
     try {
-      const result = await createRide(ride);
-      console.log("Ride created:", result);
-      setRideStatus("searching-driver");
-    } catch (error) {
-      console.log(error);
+      setRideStatus("searching");
+
+      const ride = {
+        userId: user?.id,
+        pickup,
+        destination,
+        driverId: selectedDriver.id,
+        vehicleType: RIDES[selected].name,
+        vehiclePrice: RIDES[selected].price,
+        status: "pending",
+        createdAt: new Date().toISOString(),
+      };
+
+      await createRide(ride);
+
+      setRideStatus("driver-assigned");
+    } catch (err) {
+      console.log(err);
       setRideStatus("idle");
     }
   }
@@ -125,26 +134,29 @@ export default function RequestRide() {
             </button>
           ))}
         </div>
+        <NearbyDriver
+          selectedDriver={selectedDriver}
+          setSelectedDriver={setSelectedDriver}
+        />
       </div>
       {rideStatus === "idle" && (
-        <>
-          <button
-            className="mt-auto bg-gray-900 text-white py-3.5
+        <button
+          onClick={handleRideRequest}
+          disabled={!pickup || !destination || !selectedDriver}
+          className="mt-auto bg-gray-900 text-white py-3.5
              rounded-xl text-sm font-semibold hover:bg-gray-800
+             disabled:opacity-50
              active:scale-[0.99] transition flex items-center justify-center gap-2"
-            onClick={handleRideRequest}
-          >
-            📍 Request Ride
-          </button>
-        </>
+        >
+          📍 Request Ride
+        </button>
       )}
-      {rideStatus === "searching" && (
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Search className="w-4 h-4 animate-spin" />
-          <span>Finding nearby drivers...</span>
-        </div>
+
+      {rideStatus === "searching" && <div>🔎 Finding nearby drivers...</div>}
+
+      {rideStatus === "driver-assigned" && (
+        <div>🚗 Driver assigned successfully</div>
       )}
-      {rideStatus === "searching-driver" && <p>🚗 Driver is on the way</p>}
     </>
   );
 }
