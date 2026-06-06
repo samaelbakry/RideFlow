@@ -1,11 +1,11 @@
 "use client";
 
+import { Driver as DriverData } from "@/app/page";
 import { useCurrentLocation } from "@/hooks/useCurrentLocation";
 import { getDrivers } from "@/services/drivers";
 import { useQuery } from "@tanstack/react-query";
 import { AdvancedMarker, Map, Polyline } from "@vis.gl/react-google-maps";
-import { Driver as DriverData } from "@/app/page";
-import { CarFront } from "lucide-react";
+import Image from "next/image";
 
 type Driver = {
   id: string | number;
@@ -15,9 +15,19 @@ type Driver = {
 type Props = {
   selectedDriver: DriverData | null;
   driverLocation: DriverData | null;
+  destinationCoords: {
+    lat: number;
+    lng: number;
+  } | null;
+  tripStarted:boolean
 };
 
-export default function MapView({ selectedDriver, driverLocation }: Props) {
+export default function MapView({
+  selectedDriver,
+  driverLocation,
+  destinationCoords,
+  tripStarted
+}: Props) {
   const location = useCurrentLocation();
 
   const { data: drivers } = useQuery<Driver[]>({
@@ -61,23 +71,42 @@ export default function MapView({ selectedDriver, driverLocation }: Props) {
                   : "bg-gray-900"
               }`}
             >
-              <CarFront className="text-white" />
+              <Image src={"/car2.jpg"}
+              alt="car-name"
+              width={60}
+                height={60}
+                className="size-12 object-cover rounded-xl" 
+               />
             </div>
           </AdvancedMarker>
         );
       })}
-      {location && driverLocation && (
-        <>
-          <Polyline
-            path={[
-              { lat: driverLocation.lat, lng: driverLocation.lng },
-              { lat: location.lat, lng: location.lng },
-            ]}
-            strokeColor="#111827"
-            strokeWeight={4}
-          />
-        </>
-      )}
+      
+      {!tripStarted && location && driverLocation && (
+  <Polyline
+    path={[
+      { lat: driverLocation.lat, lng: driverLocation.lng },
+      { lat: location.lat, lng: location.lng },
+    ]}
+    strokeColor="#111827"
+    strokeWeight={4}
+  />
+)}
+{tripStarted && location && destinationCoords && (
+  <Polyline
+    path={[
+      { lat: location.lat, lng: location.lng },
+      {
+        lat: destinationCoords.lat,
+        lng: destinationCoords.lng,
+      },
+    ]}
+    strokeColor="#22c55e"
+    strokeWeight={5}
+  />
+)}
+
+      
     </Map>
   );
 }

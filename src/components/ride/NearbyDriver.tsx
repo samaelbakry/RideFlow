@@ -3,11 +3,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { getDrivers } from "@/services/drivers";
 import { Driver } from "@/app/page";
+import Image from "next/image";
 
-
-
-export default function NearbyDriver({selectedDriver, setSelectedDriver}:{ selectedDriver: Driver | null; setSelectedDriver: (driver: Driver) => void}) {
-
+export default function NearbyDriver({
+  selectedDriver,
+  setSelectedDriver,
+}: {
+  selectedDriver: Driver | null;
+  setSelectedDriver: (driver: Driver) => void;
+}) {
   const { data: drivers } = useQuery<Driver[]>({
     queryKey: ["drivers"],
     queryFn: getDrivers,
@@ -30,8 +34,15 @@ export default function NearbyDriver({selectedDriver, setSelectedDriver}:{ selec
                 : "border-gray-100 hover:bg-gray-50"
             }`}
           >
-            <div className="font-semibold">
-              🚗 {driver.name}
+            <div className="font-semibold flex items-center gap-4">
+              <Image
+                src={"/car2.jpg"}
+                alt="car-name"
+                width={60}
+                height={60}
+                className="size-12 object-cover rounded-full"
+              />{" "}
+              {driver.name}
             </div>
 
             <div className="text-xs text-gray-500">

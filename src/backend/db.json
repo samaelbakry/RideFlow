@@ -31,6 +31,18 @@
       "email": "qilosik@mailinator.com",
       "password": "Pa$$w0rd!",
       "id": "YYNQFFbSSeI"
+    },
+    {
+      "fullName": "Chaim Combs",
+      "email": "sepok@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": "nDXpo5tikco"
+    },
+    {
+      "fullName": "Jacob Clay",
+      "email": "witigiguwy@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": "iGvV7cGRVyM"
     }
   ],
   "drivers": [
@@ -163,6 +175,83 @@
       "status": "pending",
       "createdAt": "2026-06-06T14:22:00.644Z",
       "id": "7lQN_JTYKCU"
+    },
+    {
+      "userId": "nDXpo5tikco",
+      "pickup": "bakos",
+      "destination": "janakles",
+      "driverId": "101",
+      "vehicleType": "UberX",
+      "vehiclePrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-06T17:49:14.094Z",
+      "id": "J5KNB9JIgRE"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "fleming",
+      "driverId": "101",
+      "vehicleType": "Comfort",
+      "vehiclePrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-06T17:56:05.771Z",
+      "id": "efXX5kO8Ee8"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "fleming",
+      "driverId": "101",
+      "vehicleType": "Comfort",
+      "vehiclePrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-06T17:58:27.915Z",
+      "id": "okWrl04Rpxc"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "fleming",
+      "driverId": "101",
+      "vehicleType": "Comfort",
+      "vehiclePrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-06T18:07:36.128Z",
+      "id": "I17THUfJ2io"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "fleming",
+      "driverId": "101",
+      "vehicleType": "Premium",
+      "vehiclePrice": 120,
+      "status": "pending",
+      "createdAt": "2026-06-06T18:19:29.907Z",
+      "id": "nuiqWDYmOl0"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "fleming",
+      "driverId": "101",
+      "vehicleType": "Premium",
+      "vehiclePrice": 120,
+      "status": "pending",
+      "createdAt": "2026-06-06T18:21:51.683Z",
+      "id": "ZMvtTHtkpKs"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "fleming",
+      "driverId": "102",
+      "vehicleType": "Comfort",
+      "vehiclePrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-06T18:48:48.114Z",
+      "id": "JZ8cbz1olBU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

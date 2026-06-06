@@ -22,6 +22,11 @@ export default function Home() {
   const location = useCurrentLocation()
   const [selectedDriver, setSelectedDriver] = useState<Driver| null>(null);
   const [selectDriverLocation, setSelectDriverLocation] = useState<Driver| null>(null);
+  const [tripStarted, setTripStarted] = useState(false);
+    const [destinationCoords, setDestinationCoords] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
 
   const initials = user?.fullName
     ?.split(" ")
@@ -48,10 +53,25 @@ export default function Home() {
                 {initials}
               </div>
             </div>
-            <RequestRide location={location} selectDriverLocation={selectDriverLocation} setSelectDriverLocation={setSelectDriverLocation}  selectedDriver={selectedDriver} setSelectedDriver={setSelectedDriver}/>
+            <RequestRide 
+            destinationCoords={destinationCoords}
+            setDestinationCoords={setDestinationCoords} 
+            location={location} 
+            selectDriverLocation={selectDriverLocation} 
+            setSelectDriverLocation={setSelectDriverLocation}  
+            selectedDriver={selectedDriver} 
+            setSelectedDriver={setSelectedDriver}
+            tripStarted={tripStarted}
+            setTripStarted={setTripStarted}
+            />
           </section>
           <section className="relative bg-gray-100">
-            <MapView  selectedDriver={selectedDriver} driverLocation={selectDriverLocation}/>
+            <MapView  
+             destinationCoords={destinationCoords}
+             selectedDriver={selectedDriver} 
+             driverLocation={selectDriverLocation}
+             tripStarted={tripStarted}
+             />
           </section>
         </div>
       </main>
