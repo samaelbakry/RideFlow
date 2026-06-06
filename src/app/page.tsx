@@ -3,6 +3,7 @@
 import ProtectedRoutes from "@/components/auth/ProtectedRoutes";
 import MapView from "@/components/home/MapView";
 import RequestRide from "@/components/ride/RequestRide";
+import { useCurrentLocation } from "@/hooks/useCurrentLocation";
 import { useAppSelector } from "@/store/hooks";
 import { useState } from "react";
 
@@ -18,7 +19,9 @@ export type Driver = {
 
 export default function Home() {
   const user = useAppSelector((state) => state.auth.user);
+  const location = useCurrentLocation()
   const [selectedDriver, setSelectedDriver] = useState<Driver| null>(null);
+  const [selectDriverLocation, setSelectDriverLocation] = useState<Driver| null>(null);
 
   const initials = user?.fullName
     ?.split(" ")
@@ -45,10 +48,10 @@ export default function Home() {
                 {initials}
               </div>
             </div>
-            <RequestRide selectedDriver={selectedDriver} setSelectedDriver={setSelectedDriver}/>
+            <RequestRide location={location} selectDriverLocation={selectDriverLocation} setSelectDriverLocation={setSelectDriverLocation}  selectedDriver={selectedDriver} setSelectedDriver={setSelectedDriver}/>
           </section>
           <section className="relative bg-gray-100">
-            <MapView  selectedDriver={selectedDriver}/>
+            <MapView  selectedDriver={selectedDriver} driverLocation={selectDriverLocation}/>
           </section>
         </div>
       </main>

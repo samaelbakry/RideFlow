@@ -3,21 +3,21 @@
 import { useCurrentLocation } from "@/hooks/useCurrentLocation";
 import { getDrivers } from "@/services/drivers";
 import { useQuery } from "@tanstack/react-query";
-import { AdvancedMarker, Map } from "@vis.gl/react-google-maps";
+import { AdvancedMarker, Map, Polyline } from "@vis.gl/react-google-maps";
 import { Driver as DriverData } from "@/app/page";
-import { Car, CarFront } from "lucide-react";
+import { CarFront } from "lucide-react";
 
 type Driver = {
   id: string | number;
   lat: number;
   lng: number;
 };
-
-export default function MapView({
-  selectedDriver,
-}: {
+type Props = {
   selectedDriver: DriverData | null;
-}) {
+  driverLocation: DriverData | null;
+};
+
+export default function MapView({ selectedDriver, driverLocation }: Props) {
   const location = useCurrentLocation();
 
   const { data: drivers } = useQuery<Driver[]>({
@@ -47,22 +47,37 @@ export default function MapView({
         </AdvancedMarker>
       )}
 
-      {drivers?.map((driver) => (
-        <AdvancedMarker
-          key={driver.id}
-          position={{ lat: driver.lat, lng: driver.lng }}
-        >
-          <div
-            className={`size-10 rounded-xl flex items-center justify-center ${
-              selectedDriver?.id === driver.id
-                ? "bg-gray-400 scale-110"
-                : "bg-gray-900"
-            }`}
-          >
-            <CarFront className="text-white" />
-          </div>
-        </AdvancedMarker>
-      ))}
+      {drivers?.map((driver) => {
+        const markPosition =
+          driverLocation && selectedDriver?.id === driver.id
+            ? { lat: driverLocation.lat, lng: driverLocation.lng }
+            : { lat: driver.lat, lng: driver.lng };
+        return (
+          <AdvancedMarker key={driver.id} position={markPosition}>
+            <div
+              className={`size-10 rounded-xl flex items-center justify-center ${
+                selectedDriver?.id === driver.id
+                  ? "bg-gray-400 scale-110"
+                  : "bg-gray-900"
+              }`}
+            >
+              <CarFront className="text-white" />
+            </div>
+          </AdvancedMarker>
+        );
+      })}
+      {location && driverLocation && (
+        <>
+          <Polyline
+            path={[
+              { lat: driverLocation.lat, lng: driverLocation.lng },
+              { lat: location.lat, lng: location.lng },
+            ]}
+            strokeColor="#111827"
+            strokeWeight={4}
+          />
+        </>
+      )}
     </Map>
   );
 }

@@ -1,48 +1,44 @@
 "use client";
 import { Driver } from "@/app/page";
+import { traceMovement } from "@/lib/helpers";
 import { createRide } from "@/services/riders";
 import { useAppSelector } from "@/store/hooks";
 import { useState } from "react";
+import { RIDES } from "../../lib/constants";
 import NearbyDriver from "./NearbyDriver";
 
-const RIDES = [
-  {
-    name: "UberX",
-    price: 50,
-    icon: "🚗",
-    eta: "3 min away",
-    duration: "~18 min",
-  },
-  {
-    name: "Comfort",
-    price: 80,
-    icon: "🚙",
-    eta: "5 min away",
-    duration: "~18 min",
-  },
-  {
-    name: "Premium",
-    price: 120,
-    icon: "🚘",
-    eta: "7 min away",
-    duration: "~18 min",
-  },
-];
+export type Props = {
+  selectedDriver: Driver | null;
+  setSelectedDriver: (driver: Driver) => void;
+  selectDriverLocation: Driver | null;
+  setSelectDriverLocation: React.Dispatch<React.SetStateAction<Driver | null>>;
+  location: {
+    lat: number;
+    lng: number;
+  } | null;
+};
 
 export default function RequestRide({
   selectedDriver,
   setSelectedDriver,
-}: {
-  selectedDriver: Driver | null;
-  setSelectedDriver: (driver: Driver) => void;
-}) {
+  setSelectDriverLocation,
+  location,
+  selectDriverLocation,
+}: Props) {
   const user = useAppSelector((state) => state.auth.user);
   const [selected, setSelected] = useState(0);
   const [destination, setDestination] = useState("");
+
+  const [destinationCoords, setDestinationCoords] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
   const [pickup, setPickUp] = useState("");
   const [rideStatus, setRideStatus] = useState("idle");
 
   async function handleRideRequest() {
+
+
     if (!pickup || !destination || !selectedDriver) return;
 
     try {
@@ -62,6 +58,40 @@ export default function RequestRide({
       await createRide(ride);
 
       setRideStatus("driver-assigned");
+
+      setSelectDriverLocation(selectedDriver);
+      if (!location) return;
+
+      const interval = setInterval(() => {
+        setSelectDriverLocation((prev) => {
+          if (!prev) return null;
+
+          const nextPosition = traceMovement(
+            {
+              lat: prev.lat,
+              lng: prev.lng,
+            },
+            {
+              lat: location.lat,
+              lng: location.lng,
+            },
+          );
+
+          const arrived =
+            Math.abs(nextPosition.lat - location.lat) < 0.0001 &&
+            Math.abs(nextPosition.lng - location.lng) < 0.0001;
+
+          if (arrived) {
+            clearInterval(interval);
+            setRideStatus("arrived");
+          }
+          return {
+            ...prev,
+            lat: nextPosition.lat,
+            lng: nextPosition.lng,
+          };
+        });
+      }, 1000);
     } catch (err) {
       console.log(err);
       setRideStatus("idle");
@@ -157,6 +187,14 @@ export default function RequestRide({
       {rideStatus === "driver-assigned" && (
         <div>🚗 Driver assigned successfully</div>
       )}
+      {rideStatus === "arrived" && (
+  <button className="mt-auto bg-gray-900 text-white py-3.5
+             rounded-xl text-sm font-semibold hover:bg-gray-800
+             disabled:opacity-50
+             active:scale-[0.99] transition flex items-center justify-center gap-2">
+   ✓ Start Trip
+  </button>
+)}
     </>
   );
 }

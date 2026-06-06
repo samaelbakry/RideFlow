@@ -7,19 +7,19 @@ import { useAppSelector } from "@/store/hooks";
 export default function ProtectedRoutes({children,}: {  children: React.ReactNode;}) {
   const router = useRouter();
 
-  const user = useAppSelector(
-    (state) => state.auth.user
-  );
+  const user = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
     if (!user) {
       router.replace("/login");
     }
+
   }, [user, router]);
 
-  if (!user) {
-    return null;
-  }
+  // if (!user) {
+
+  //   return null;
+  // }
 
   return <>{children}</>;
 }

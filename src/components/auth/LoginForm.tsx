@@ -45,7 +45,7 @@ export default function LoginForm() {
 
   return (
     <>
-      <Card className="border-none shadow-sm">
+      <Card className="rounded-2xl border-none bg-background p-8 shadow-sm">
         <CardContent className="p-8">
           <div className="mb-8">
             <h2 className="text-3xl font-semibold tracking-tight">

@@ -19,6 +19,18 @@
       "email": "julu@mailinator.com",
       "password": "Pa$$w0rd!",
       "id": "Mh7GUUTKr0w"
+    },
+    {
+      "fullName": "Harrison Duncan",
+      "email": "bovumuca@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": "YAKCnAyackM"
+    },
+    {
+      "fullName": "Anika Mann",
+      "email": "qilosik@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": "YYNQFFbSSeI"
     }
   ],
   "drivers": [
@@ -107,6 +119,50 @@
       "status": "pending",
       "createdAt": "2026-06-04T14:35:30.443Z",
       "id": "PyfYSllnnb0"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos ",
+      "destination": "fleming",
+      "driverId": "101",
+      "vehicleType": "Comfort",
+      "vehiclePrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-06T12:42:32.735Z",
+      "id": "PiHuDhkhhdo"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "fleming",
+      "driverId": "101",
+      "vehicleType": "UberX",
+      "vehiclePrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-06T13:37:04.937Z",
+      "id": "f1h-XJTp2Uk"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "backos",
+      "destination": "janakles",
+      "driverId": "102",
+      "vehicleType": "Comfort",
+      "vehiclePrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-06T13:54:58.031Z",
+      "id": "sC_Ji195IBA"
+    },
+    {
+      "userId": "YYNQFFbSSeI",
+      "pickup": "bakos",
+      "destination": "janakles",
+      "driverId": "101",
+      "vehicleType": "Comfort",
+      "vehiclePrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-06T14:22:00.644Z",
+      "id": "7lQN_JTYKCU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
