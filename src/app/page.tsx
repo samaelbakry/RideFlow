@@ -28,7 +28,10 @@ export default function Home() {
     lng: number;
   } | null>(null);
 
-  const initials = user?.fullName
+  const authUser = user as | { name?: string; firstName?: string; lastName?: string; fullName?: string } | undefined;
+  const userName =authUser?.name ||`${authUser?.firstName ?? ""} ${authUser?.lastName ?? ""}`.trim() || authUser?.fullName;
+
+  const initials = userName
     ?.split(" ")
     .map((n) => n[0])
     .join("")
@@ -43,7 +46,7 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="font-bold text-[19px] text-gray-900 leading-tight">
-                  Hi, {user?.fullName?.split(" ")[0]} 👋
+                  Hi, {userName?.split(" ")[0] || "there"} 👋
                 </h1>
                 <p className="text-xs text-gray-400 mt-0.5">
                   Book your ride in seconds

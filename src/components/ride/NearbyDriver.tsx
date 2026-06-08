@@ -5,13 +5,13 @@ import { getDrivers } from "@/services/drivers";
 import { Driver } from "@/app/page";
 import Image from "next/image";
 
-export default function NearbyDriver({
-  selectedDriver,
-  setSelectedDriver,
-}: {
+type Props={
   selectedDriver: Driver | null;
   setSelectedDriver: (driver: Driver) => void;
-}) {
+}
+
+export default function NearbyDriver({selectedDriver, setSelectedDriver}:Props ) {
+  
   const { data: drivers } = useQuery<Driver[]>({
     queryKey: ["drivers"],
     queryFn: getDrivers,

@@ -1,20 +1,16 @@
 "use client";
 
-import { Driver as DriverData } from "@/app/page";
+import { Driver } from "@/app/page";
 import { useCurrentLocation } from "@/hooks/useCurrentLocation";
 import { getDrivers } from "@/services/drivers";
 import { useQuery } from "@tanstack/react-query";
 import { AdvancedMarker, Map, Polyline } from "@vis.gl/react-google-maps";
 import Image from "next/image";
 
-type Driver = {
-  id: string | number;
-  lat: number;
-  lng: number;
-};
+
 type Props = {
-  selectedDriver: DriverData | null;
-  driverLocation: DriverData | null;
+  selectedDriver: Driver | null;
+  driverLocation: Driver | null;
   destinationCoords: {
     lat: number;
     lng: number;
