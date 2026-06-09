@@ -9,12 +9,15 @@ import { useState } from "react";
 
 
 export type Driver = {
-  id: string | number;
+  id: string;
+  name: string;
+  rating: number;
+  carModel: string;
+  plateNumber: string;
   lat: number;
   lng: number;
-  name:string,
-  rating:string,
-  carModel:string
+  isAvailable: boolean;
+  rideType: "UberX" | "Comfort" | "Premium";
 };
 
 export default function Home() {

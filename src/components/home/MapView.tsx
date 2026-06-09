@@ -3,10 +3,11 @@
 import { Driver } from "@/app/page";
 import { useCurrentLocation } from "@/hooks/useCurrentLocation";
 import { getDrivers } from "@/services/drivers";
+import { getRoute } from "@/services/searchForLocationServices";
 import { useQuery } from "@tanstack/react-query";
 import { AdvancedMarker, Map, Polyline } from "@vis.gl/react-google-maps";
 import Image from "next/image";
-
+import { useEffect, useState } from "react";
 
 type Props = {
   selectedDriver: Driver | null;
@@ -15,14 +16,14 @@ type Props = {
     lat: number;
     lng: number;
   } | null;
-  tripStarted:boolean
+  tripStarted: boolean;
 };
 
 export default function MapView({
   selectedDriver,
   driverLocation,
   destinationCoords,
-  tripStarted
+  tripStarted,
 }: Props) {
   const location = useCurrentLocation();
 
@@ -30,6 +31,26 @@ export default function MapView({
     queryKey: ["drivers"],
     queryFn: getDrivers,
   });
+
+  const [routePath, setRoutePath] = useState<{ lat: number; lng: number }[]>(
+    [],
+  );
+
+  useEffect(() => {
+    async function handlePath() {
+      if (!location) return;
+
+      const start = tripStarted ? location : driverLocation;
+      const end = tripStarted ? destinationCoords : location;
+
+      if (!start && !end) return;
+
+      const path = await getRoute(start, end);
+
+      setRoutePath(path);
+    }
+    handlePath();
+  }, [location, driverLocation, destinationCoords, tripStarted]);
 
   return (
     <Map
@@ -67,42 +88,53 @@ export default function MapView({
                   : "bg-gray-900"
               }`}
             >
-              <Image src={"/car2.jpg"}
-              alt="car-name"
-              width={60}
+              <Image
+                src={"/car2.jpg"}
+                alt="car-name"
+                width={60}
                 height={60}
-                className="size-12 object-cover rounded-xl" 
-               />
+                className="size-12 object-cover rounded-xl"
+              />
             </div>
           </AdvancedMarker>
         );
       })}
-      
-      {!tripStarted && location && driverLocation && (
-  <Polyline
-    path={[
-      { lat: driverLocation.lat, lng: driverLocation.lng },
-      { lat: location.lat, lng: location.lng },
-    ]}
-    strokeColor="#111827"
-    strokeWeight={4}
-  />
-)}
-{tripStarted && location && destinationCoords && (
-  <Polyline
-    path={[
-      { lat: location.lat, lng: location.lng },
-      {
-        lat: destinationCoords.lat,
-        lng: destinationCoords.lng,
-      },
-    ]}
-    strokeColor="#22c55e"
-    strokeWeight={5}
-  />
-)}
 
-      
+      <Polyline
+        path={routePath}
+        options={{
+          strokeColor: "#000000",
+          strokeOpacity: 0.15,
+          strokeWeight: 14,
+        }}
+      />
+
+      <Polyline
+        path={routePath}
+        options={{
+          strokeColor: "#ffffff",
+          strokeOpacity: 1,
+          strokeWeight: 10,
+        }}
+      />
+
+      <Polyline
+        path={routePath}
+        options={{
+          strokeColor: tripStarted ? "#22c55e" : "#3b82f6",
+          strokeOpacity: 1,
+          strokeWeight: 6,
+        }}
+      />
+
+      <Polyline
+        path={routePath}
+        options={{
+          strokeColor: "#ffffff",
+          strokeOpacity: 0.3,
+          strokeWeight: 2,
+        }}
+      />
     </Map>
   );
 }

@@ -24,3 +24,16 @@ export type RequestRideProps = {
 
   setTripStarted: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type Place = {
+  name: string;
+  lat: number;
+  lng: number;
+};
+export type SearchPlace = {
+  place_id: number;
+  display_name: string;
+  name: string;
+  lat: string;
+  lon: string;
+};

@@ -1,20 +1,3 @@
-export const places = {
-  fleming: {
-    lat: 31.221,
-    lng: 29.957,
-  },
-
-  stanley: {
-    lat: 31.240,
-    lng: 29.967,
-  },
-
-  smouha: {
-    lat: 31.215,
-    lng: 29.950,
-  },
-};
-
 export const RIDES = [
   {
     name: "UberX",

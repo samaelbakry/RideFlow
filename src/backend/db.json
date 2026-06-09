@@ -54,7 +54,8 @@
       "plateNumber": "ABC-123",
       "lat": 31.2156,
       "lng": 29.9553,
-      "isAvailable": true
+      "isAvailable": true,
+      "rideType": "UberX"
     },
     {
       "id": "102",
@@ -64,7 +65,8 @@
       "plateNumber": "XYZ-456",
       "lat": 31.205,
       "lng": 29.92,
-      "isAvailable": true
+      "isAvailable": true,
+      "rideType": "UberX"
     }
   ],
   "rides": [
@@ -199,6 +201,127 @@
       "status": "pending",
       "createdAt": "2026-06-08T19:21:41.050Z",
       "id": "gmCr5X-s0nk"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Fleming, Alexandria, 21531, Egypt",
+      "driverId": "101",
+      "vehicleType": "UberX",
+      "vehiclePrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-09T11:45:11.661Z",
+      "id": "dMwU8bwyPRk"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Stanley Beach, Alexandria, Egypt",
+      "driverId": "101",
+      "vehicleType": "Comfort",
+      "vehiclePrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-09T11:48:57.051Z",
+      "id": "BiW6Ud6HV_4"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Stanley Bridge, Fleming, Alexandria, 21531, Egypt",
+      "driverId": "102",
+      "vehicleType": "UberX",
+      "vehiclePrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-09T11:59:00.059Z",
+      "id": "C7qtylFA6U4"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Roshdy, Al Shahid Salah Moustafa Street, Al Masala East, Alexandria, 21521, Egypt",
+      "driverId": "101",
+      "vehicleType": "UberX",
+      "vehiclePrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-09T12:16:34.740Z",
+      "id": "Nybl7LxS1SQ"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Fleming, Alexandria, 21531, Egypt",
+      "driverId": "101",
+      "vehicleType": "UberX",
+      "vehiclePrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-09T12:19:14.665Z",
+      "id": "-EQBf_TJXvc"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Fleming, Alexandria, 21531, Egypt",
+      "driverId": "102",
+      "vehicleType": "UberX",
+      "vehiclePrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-09T12:19:48.997Z",
+      "id": "83eVyzRotcA"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Gleem, Alexandria, 21531, Egypt",
+      "driverId": "101",
+      "vehicleType": "UberX",
+      "vehiclePrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-09T12:29:47.902Z",
+      "id": "YH2PghX-cM0"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Fleming, Alexandria, 21531, Egypt",
+      "driverId": "101",
+      "vehicleType": "Comfort",
+      "vehiclePrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-09T12:32:14.615Z",
+      "id": "ceTiJGPkTVs"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Fleming, Alexandria, 21531, Egypt",
+      "driverId": "101",
+      "vehicleType": "UberX",
+      "vehiclePrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-09T12:35:12.743Z",
+      "id": "D8kL_w6Oz2M"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Fleming, Alexandria, 21531, Egypt",
+      "driverId": "101",
+      "vehicleType": "UberX",
+      "vehiclePrice": 50,
+      "status": "pending",
+      "createdAt": "2026-06-09T12:47:41.747Z",
+      "id": "XWq7zLxre0U"
+    },
+    {
+      "userId": "FOsgD8qtsiE",
+      "pickup": "bakos",
+      "destination": "Fleming, Alexandria, 21531, Egypt",
+      "driverId": "101",
+      "vehicleType": "Comfort",
+      "vehiclePrice": 80,
+      "status": "pending",
+      "createdAt": "2026-06-09T12:54:20.869Z",
+      "id": "g2HFAJWvTWI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

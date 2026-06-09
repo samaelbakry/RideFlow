@@ -4,12 +4,12 @@ import { traceMovement } from "@/lib/helpers";
 import { createRide } from "@/services/riders";
 import { useAppSelector } from "@/store/hooks";
 import { useState } from "react";
-import { places, RIDES } from "../../lib/constants";
+import {  RIDES } from "../../lib/constants";
 import NearbyDriver from "./NearbyDriver";
 import StartTrip from "./StartTrip";
 import PickUp from "../ui/PickUp";
 import CarType from "../ui/CarType";
-import { RequestRideProps } from "@/types/requestRideType";
+import { Place, RequestRideProps } from "@/types/requestRideType";
 import { toast } from "sonner";
 import { Driver } from "@/app/page";
 import { AnimatePresence, motion } from "framer-motion";
@@ -25,13 +25,14 @@ export default function RequestRide({
   destinationCoords,
   setDestinationCoords,
   setTripStarted,
-  tripStarted,
 }: RequestRideProps) {
   const user = useAppSelector((state) => state.auth.user);
 
   const [selected, setSelected] = useState(0);
   const [destination, setDestination] = useState("");
   const [pickup, setPickUp] = useState("");
+  const [destinationPlace, setDestinationPlace] =
+  useState<Place | null>(null);
 
   const [rideStatus, setRideStatus] = useState<RideStatus>("idle");
 
@@ -40,20 +41,20 @@ export default function RequestRide({
 
   function handleDriverSelect(driver: Driver) {
     setSelectedDriver(driver);
-    const driverMsg = setTimeout(() => {
-      toast.success("Driver accepted your ride 🚗");
-    }, 1000);
-    clearInterval(driverMsg);
+   setTimeout(() => {
+  toast.success("Driver accepted your ride 🚗");
+}, 1000);
   }
 
   async function handleRideRequest() {
     if (!pickup || !destination || !selectedDriver) return;
 
-    const coords = places[destination.toLowerCase() as keyof typeof places];
+    if(!destinationPlace) return
 
-    if (!coords) return;
-
-    setDestinationCoords(coords);
+    setDestinationCoords({
+      lat:destinationPlace.lat,
+      lng:destinationPlace.lng
+    })
 
     const ride = {
       userId: user?.id,
@@ -116,6 +117,7 @@ export default function RequestRide({
             setPickUp={setPickUp}
             destination={destination}
             setDestination={setDestination}
+            setDestinationPlace={setDestinationPlace}
           />
         </div>
       )}
@@ -133,7 +135,7 @@ export default function RequestRide({
               Choose ride type
             </p>
 
-            <CarType selected={selected} setSelected={setSelected} />
+            <CarType selected={selected} setSelected={setSelected}  />
 
             <motion.div
               initial={{ opacity: 0 }}
@@ -180,11 +182,7 @@ export default function RequestRide({
           <motion.div
             initial={{ opacity: 0.5 }}
             animate={{ opacity: 1 }}
-            className="
-      mt-6
-      text-center
-      text-gray-500
-    "
+            className=" mt-6 text-center text-gray-500"
           >
             Driver is here!
           </motion.div>
@@ -194,16 +192,6 @@ export default function RequestRide({
             destinationCoords={destinationCoords}
             userLocation={location}
             onStart={() => setTripStarted(true)}
-            // onComplete={() => setRideStatus("idle")}
-            // onComplete={() => {
-            //   setRideStatus("arrived");
-            //   setSelectedDriver(null);
-            //   setSelectDriverLocation(null);
-            //   setDestinationCoords(null);
-            //   setTripStarted(false);
-            //   setPickUp("");
-            //   setDestination("");
-            // }}
             onComplete={() => {
               setTimeout(() => {
                 setRideStatus("idle");
