@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RideFlow
 
-## Getting Started
+RideFlow is a modern ride-hailing platform inspired by real-world transportation services such as Uber and Careem. The application provides an end-to-end booking experience, allowing users to search for destinations, request rides, track nearby drivers, and monitor trip progress in real time.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Authentication & User Management
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Secure user registration and login.
+* Persistent authentication state management.
+* Protected routes for authenticated users.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Interactive Maps
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Real-time user location detection.
+* Google Maps integration.
+* Pickup and destination search with place autocomplete.
+* Route visualization between locations.
 
-## Learn More
+### Ride Booking System
 
-To learn more about Next.js, take a look at the following resources:
+* Ride request creation.
+* Multiple ride categories and pricing options.
+* Estimated trip distance and duration calculation.
+* Dynamic fare estimation.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Driver Discovery & Tracking
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* Nearby drivers displayed on the map.
+* Driver selection workflow.
+* Live driver movement simulation and tracking.
+* Real-time trip status updates.
 
-## Deploy on Vercel
+### Trip Management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Trip request confirmation.
+* Driver arrival tracking.
+* Ride start and completion flow.
+* End-to-end ride lifecycle management.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tech Stack
+
+* Next.js 16.2
+* React 19
+* TypeScript
+* Redux Toolkit
+* TanStack Query
+* Google Maps Platform
+* Tailwind CSS
+* Firebase
+
+## Architecture
+
+The project follows a scalable and maintainable architecture with:
+
+* Feature-based component organization.
+* Service layer abstraction for API communication.
+* Global state management using Redux Toolkit.
+* Server and client component separation.
+* Reusable custom hooks.
+* Type-safe development with TypeScript.
+
+## Project Structure
+
+* `src/app` — Application routes and layouts
+* `src/components` — Reusable UI and feature components
+* `src/hooks` — Custom React hooks
+* `src/services` — API and external service integrations
+* `src/store` — Redux state management
+* `src/providers` — Global application providers
+* `src/lib` — Shared utilities and constants
+
