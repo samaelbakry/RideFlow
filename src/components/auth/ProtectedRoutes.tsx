@@ -4,22 +4,22 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/store/hooks";
 
-export default function ProtectedRoutes({children,}: {  children: React.ReactNode;}) {
+export default function ProtectedRoutes({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
 
-  const user = useAppSelector((state) => state.auth.user);
+  const { initialized ,  user }= useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    if (!user) {
+    if (!user && initialized) {
       router.replace("/login");
     }
+  }, [user, router , initialized]);
 
-  }, [user, router]);
-
-  // if (!user) {
-
-  //   return null;
-  // }
+  if (!initialized) return null;
 
   return <>{children}</>;
 }
